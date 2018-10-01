@@ -12,7 +12,7 @@ function validaEmail(event) {
 
     if(!filter.test(email.value)){
         email.style.backgroundColor="#ffb3b3";
-        msg.textContent="Por gentileza informar email válido!";
+        msg.textContent="Por gentileza informar um email válido!";
     }
     else{
         email.style.backgroundColor="#b3ffcc";
