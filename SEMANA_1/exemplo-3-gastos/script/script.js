@@ -44,33 +44,54 @@ button.addEventListener("click", function(event){
 	}		
 	
 	else{
+        
+            if (inputMoney.value == 0)
+            {
+                mensagemMoney.textContent = "Precisa ser maior que R$0,00!"; 
+                inputMoney.style.background = "#ff9999";
+                inputDate.style.background = "#ffffff";
+                inputName.style.background = "#ffffff";
+                mensagemNome.textContent = "";  
+                mensagemData.textContent = "";
+            }
+            else
+            {   
+                for (i = 0; i < linha.rows.length; i++) {
+
+                    
+
+                  }
+
+                inputMoney.style.background = "#ffffff";
+                inputDate.style.background = "#ffffff";
+                inputName.style.background = "#ffffff";
+                mensagemMoney.textContent = "";  
+                mensagemData.textContent = "";
+                mensagemNome.textContent = "";  
+                
+                const colunaName = document.createElement("td");
+                const colunaNomeConteudo = document.createTextNode(inputName.value);
+                colunaName.appendChild(colunaNomeConteudo);
+        
+                const colunaMoney = document.createElement("td");
+                const colunaMoneyConteudo = document.createTextNode(inputMoney.value);
+                colunaMoney.appendChild(colunaMoneyConteudo);
+        
+                const colunaDate = document.createElement("td");
+                const colunaDateConteudo = document.createTextNode(inputDate.value);
+                colunaDate.appendChild(colunaDateConteudo);
+        
+                linha.appendChild(colunaName);
+                linha.appendChild(colunaMoney);
+                linha.appendChild(colunaDate);
+        
+                tabela.appendChild(linha);
+
+                inputName.value = "";
+                inputDate.value = "";
+                inputMoney.value = "";
 			
-			inputMoney.style.background = "#ffffff";
-            inputDate.style.background = "#ffffff";
-            inputName.style.background = "#ffffff";
-            mensagemMoney.textContent = "";  
-            mensagemData.textContent = "";
-            mensagemNome.textContent = "";  
-			 
-               
-            const colunaName = document.createElement("td");
-            const colunaNomeConteudo = document.createTextNode(inputName.value);
-            colunaName.appendChild(colunaNomeConteudo);
-    
-            const colunaMoney = document.createElement("td");
-            const colunaMoneyConteudo = document.createTextNode(inputMoney.value);
-            colunaMoney.appendChild(colunaMoneyConteudo);
-    
-            const colunaDate = document.createElement("td");
-            const colunaDateConteudo = document.createTextNode(inputDate.value);
-            colunaDate.appendChild(colunaDateConteudo);
-    
-            linha.appendChild(colunaName);
-            linha.appendChild(colunaMoney);
-            linha.appendChild(colunaDate);
-    
-            tabela.appendChild(linha);
-			
+            }			
 		}
 		        
     });
