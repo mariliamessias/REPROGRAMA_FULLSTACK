@@ -10,16 +10,50 @@ button.addEventListener("click", function(event){
     const inputDate = document.getElementById('transacaoInputDate');
     const inputMoney = document.getElementById('transacaoInputMoney');
     const mensagemMoney = document.getElementById('msgMoney');
+    const mensagemNome = document.getElementById('msgNome');
+    const mensagemData = document.getElementById('msgData');
 
     const linha = document.createElement("tr");
     
-    if (inputName.value && inputMoney.value && inputDate.value){
+    if (!inputName.value){
+        mensagemNome.textContent="Informe um nome!";
+        inputName.style.background = "#ff9999";
+        inputMoney.style.background = "#ffffff";
+        inputDate.style.background = "#ffffff";
+        mensagemMoney.textContent = "";  
+            mensagemData.textContent = "";
+           
+    }
+    else if(!inputDate.value){
+        mensagemData.textContent="Informe uma data!";
+        inputDate.style.background = "#ff9999";
+        inputMoney.style.background = "#ffffff";
+        inputName.style.background = "#ffffff";
+        mensagemMoney.textContent = "";  
+        
+            mensagemMoney.textContent = ""; 
 
-        if (!isNaN(inputMoney.value)) {
+
+    } else if(!inputMoney.value){
+        inputMoney.style.background = "#ff9999";
+        inputDate.style.background = "#ffffff";
+        inputName.style.background = "#ffffff";
+        mensagemMoney.textContent = "";  
+            mensagemData.textContent = "";
+            
+        mensagemMoney.textContent = "Informe um valor válido!";      
+    }
+     else{   
+         if (!isNaN(inputMoney.value)) {
 
             inputMoney.style.background = "#ffffff";
-            mensagemMoney.textContent = "";   
-    
+            inputDate.style.background = "#ffffff";
+            inputName.style.background = "#ffffff";
+            mensagemMoney.textContent = "";  
+            mensagemData.textContent = "";
+            mensagemNome.textContent = "";  
+   
+               
             const colunaName = document.createElement("td");
             const colunaNomeConteudo = document.createTextNode(inputName.value);
             colunaName.appendChild(colunaNomeConteudo);
@@ -38,12 +72,9 @@ button.addEventListener("click", function(event){
     
             tabela.appendChild(linha);
     
-        }else{
-            inputMoney.style.background = "#ff9999";
-            mensagemMoney.textContent = "Informe um valor válido!";        
         }
-    
     }
-
+    
+    
     
     });
