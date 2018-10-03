@@ -12,47 +12,46 @@ button.addEventListener("click", function(event){
     const mensagemMoney = document.getElementById('msgMoney');
     const mensagemNome = document.getElementById('msgNome');
     const mensagemData = document.getElementById('msgData');
+	const dataValida = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
 
     const linha = document.createElement("tr");
     
-    if (!inputName.value){
-        mensagemNome.textContent="Informe um nome!";
+    if (inputName.value.trim() == ''){
+        mensagemNome.textContent="Campo obrigatório!";
         inputName.style.background = "#ff9999";
         inputMoney.style.background = "#ffffff";
         inputDate.style.background = "#ffffff";
         mensagemMoney.textContent = "";  
-            mensagemData.textContent = "";
+        mensagemData.textContent = "";
            
     }
-    else if(!inputDate.value){
-        mensagemData.textContent="Informe uma data!";
+    else if(inputDate.value.trim() == '' || (!inputDate.value.match(dataValida))){
+        mensagemData.textContent="Informe uma data válida Ex.: DD/MM/AAAA";
         inputDate.style.background = "#ff9999";
         inputMoney.style.background = "#ffffff";
         inputName.style.background = "#ffffff";
         mensagemMoney.textContent = "";  
-        
-            mensagemMoney.textContent = ""; 
-
-
-    } else if(!inputMoney.value){
-        inputMoney.style.background = "#ff9999";
-        inputDate.style.background = "#ffffff";
-        inputName.style.background = "#ffffff";
-        mensagemMoney.textContent = "";  
-            mensagemData.textContent = "";
-            
-        mensagemMoney.textContent = "Informe um valor válido!";      
-    }
-     else{   
-         if (!isNaN(inputMoney.value)) {
-
-            inputMoney.style.background = "#ffffff";
+        mensagemNome.textContent = ""; 
+    } 
+	else if(inputMoney.value.trim() == '' || (isNaN(inputMoney.value) )){
+		
+		mensagemMoney.textContent = "Informe um valor válido!"; 
+		inputMoney.style.background = "#ff9999";
+		inputDate.style.background = "#ffffff";
+		inputName.style.background = "#ffffff";
+		mensagemNome.textContent = "";  
+		mensagemData.textContent = "";
+	}		
+	
+	else{
+			
+			inputMoney.style.background = "#ffffff";
             inputDate.style.background = "#ffffff";
             inputName.style.background = "#ffffff";
             mensagemMoney.textContent = "";  
             mensagemData.textContent = "";
             mensagemNome.textContent = "";  
-   
+			 
                
             const colunaName = document.createElement("td");
             const colunaNomeConteudo = document.createTextNode(inputName.value);
@@ -71,10 +70,7 @@ button.addEventListener("click", function(event){
             linha.appendChild(colunaDate);
     
             tabela.appendChild(linha);
-    
-        }
-    }
-    
-    
-    
+			
+		}
+		        
     });
