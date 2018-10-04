@@ -1,4 +1,14 @@
 const button = document.querySelector(".transacao__button");
+const restaurantes = document.querySelectorAll(".extrato__table");
+
+function validaNome(valor){
+    
+    for (let i = 0; i < restaurantes.length; i++){
+        restaurante = restaurantes[i];
+    }
+    return true;
+  }
+
 
 button.addEventListener("click", function(event){
 
@@ -45,7 +55,7 @@ button.addEventListener("click", function(event){
 	
 	else{
         
-            if (inputMoney.value == 0)
+            if (parseFloat(inputMoney.value) <= 0)
             {
                 mensagemMoney.textContent = "Precisa ser maior que R$0,00!"; 
                 inputMoney.style.background = "#ff9999";
@@ -56,40 +66,42 @@ button.addEventListener("click", function(event){
             }
             else
             {   
-                for (i = 0; i < linha.rows.length; i++) {
+                if (!validaNome(inputName.value)){
+                    alert("já existe!");
+                }
 
+                else{
+
+                    inputMoney.style.background = "#ffffff";
+                    inputDate.style.background = "#ffffff";
+                    inputName.style.background = "#ffffff";
+                    mensagemMoney.textContent = "";  
+                    mensagemData.textContent = "";
+                    mensagemNome.textContent = "";  
                     
-
-                  }
-
-                inputMoney.style.background = "#ffffff";
-                inputDate.style.background = "#ffffff";
-                inputName.style.background = "#ffffff";
-                mensagemMoney.textContent = "";  
-                mensagemData.textContent = "";
-                mensagemNome.textContent = "";  
-                
-                const colunaName = document.createElement("td");
-                const colunaNomeConteudo = document.createTextNode(inputName.value);
-                colunaName.appendChild(colunaNomeConteudo);
+                    const colunaName = document.createElement("td");
+                    const colunaNomeConteudo = document.createTextNode(inputName.value);
+                    colunaName.appendChild(colunaNomeConteudo);
+            
+                    const colunaMoney = document.createElement("td");
+                    const colunaMoneyConteudo = document.createTextNode(inputMoney.value);
+                    colunaMoney.appendChild(colunaMoneyConteudo);
+            
+                    const colunaDate = document.createElement("td");
+                    const colunaDateConteudo = document.createTextNode(inputDate.value);
+                    colunaDate.appendChild(colunaDateConteudo);
+            
+                    linha.appendChild(colunaName);
+                    linha.appendChild(colunaMoney);
+                    linha.appendChild(colunaDate);
+            
+                    tabela.appendChild(linha);
+    
+                    inputName.value = "";
+                    inputDate.value = "";
+                    inputMoney.value = "";
+                }
         
-                const colunaMoney = document.createElement("td");
-                const colunaMoneyConteudo = document.createTextNode(inputMoney.value);
-                colunaMoney.appendChild(colunaMoneyConteudo);
-        
-                const colunaDate = document.createElement("td");
-                const colunaDateConteudo = document.createTextNode(inputDate.value);
-                colunaDate.appendChild(colunaDateConteudo);
-        
-                linha.appendChild(colunaName);
-                linha.appendChild(colunaMoney);
-                linha.appendChild(colunaDate);
-        
-                tabela.appendChild(linha);
-
-                inputName.value = "";
-                inputDate.value = "";
-                inputMoney.value = "";
 			
             }			
 		}
