@@ -2,8 +2,6 @@ const todosAlunos = document.querySelectorAll(".aluno"); // pega todos os elemen
 
 for (let i = 0; i < todosAlunos.length; i++)
 {
-    //console.log(todosAlunos[i]);
-    // que uma aluna, vai assumir a primeira posicao
     const aluno = todosAlunos[i];
     const tdAlunoNotaUm = aluno.querySelector(".info-notaum");
     const primeiraNota = tdAlunoNotaUm.textContent;
@@ -14,4 +12,9 @@ for (let i = 0; i < todosAlunos.length; i++)
     const calculo = (parseFloat(primeiraNota) + parseFloat(segundaNota )) / 2;
 
     tdMedia.textContent = calculo.toFixed(2);
+
+    if (calculo < 5){
+        todosAlunos[i].style.backgroundColor = "#ff9999";
+    }
+    
 }
