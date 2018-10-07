@@ -9,8 +9,6 @@ for (let i = 0; i < todosAlunos.length; i++)
     const segundaNota = tdAlunoNotaDois.textContent;
     const tdMedia = aluno.querySelector(".info-media");
 
-   // const calculo = (parseFloat(primeiraNota) + parseFloat(segundaNota )) / 2;
-
     const calculo = calculaMedia(primeiraNota, segundaNota);
     tdMedia.textContent =  calculo;
 
