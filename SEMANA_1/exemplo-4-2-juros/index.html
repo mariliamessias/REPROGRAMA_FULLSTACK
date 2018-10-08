@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{Reprograma} - Cálculo de Juros Simples</title>
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
@@ -74,16 +74,17 @@
 			<form id="form-adiciona">
 				<div class="grupo">
 					<label for="dinheiro">Money ($):</label>
-					<input id="dinheiro" name="dinheiro" type="text" placeholder="digite a grana" class="campo">
+					<input id="dinheiro" name="dinheiro" type="number" placeholder="digite a grana" class="campo">
 				</div>
 				<div class="grupo">
 					<label for="taxa">Taxa de Juros:</label>
-					<input id="taxa" name="taxa" type="text" placeholder="e a taxa?" class="campo campo-medio">
+					<input id="taxa" name="taxa" type="number" placeholder="e a taxa?" class="campo campo-medio">
 				</div>
 				<div class="grupo">
 					<label for="tempo">Quanto Tempo?</label>
-					<input id="tempo" name="tempo" type="text" placeholder="mas quanto tempo? em meses" class="campo campo-medio">
+					<input id="tempo" name="tempo" type="number" placeholder="mas quanto tempo? em meses" class="campo campo-medio">
 				</div>
+				<p id=msgForm></p>
 
 				<button id="adicionar-juros" class="botao bto-principal">Adicionar</button>
 				<button id="limpar-form" class="botao bto-principal">Limpar</button>
