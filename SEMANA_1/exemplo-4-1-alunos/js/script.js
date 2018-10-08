@@ -1,21 +1,20 @@
+window.addEventListener("load", function(){
+    imprimeTabelaDoHTML();
+});
+
+function imprimeTabelaDoHTML(){
+    
 const todosAlunos = document.querySelectorAll(".aluno"); // pega todos os elementos da classe aluno
 
-for (let i = 0; i < todosAlunos.length; i++)
-{
-    const aluno = todosAlunos[i];
-    const tdAlunoNotaUm = aluno.querySelector(".info-notaum");
-    const primeiraNota = tdAlunoNotaUm.textContent;
-    const tdAlunoNotaDois = aluno.querySelector(".info-notadois");
-    const segundaNota = tdAlunoNotaDois.textContent;
-    const tdMedia = aluno.querySelector(".info-media");
+    todosAlunos.forEach(function(aluno){ // pára cada item do array
 
-    const calculo = calculaMedia(primeiraNota, segundaNota);
-    tdMedia.textContent =  calculo;
+        const primeiraNota = aluno.querySelector(".info-notaum").textContent;
+        const segundaNota = aluno.querySelector(".info-notadois").textContent;
+        let calculo = calculaMedia(primeiraNota, segundaNota);
+    
+        if (calculo < 5) aluno.style.backgroundColor = "#ff9999";
+        else aluno.style.backgroundColor = "#99ff99";
+        aluno.querySelector(".info-media").textContent = calculo.toFixed(2);  
+    });
 
-    if (calculo < 5){
-        todosAlunos[i].style.backgroundColor = "#ff9999";
-    }
-    else{
-        todosAlunos[i].style.backgroundColor = "#99ff99";
-    } 
 }
