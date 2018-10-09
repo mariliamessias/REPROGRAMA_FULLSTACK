@@ -3,13 +3,35 @@ const adicionarAluno = document.getElementById("adicionar-aluno");
 adicionarAluno.addEventListener('click', function(event){
 
     event.preventDefault();
-    const formularioAluno = document.querySelector("#form-adiciona");
+   
 
+ function obtemAluno()
+ {
+     return obterDados(document.querySelector("#form-adiciona"));;
+ }   
     //const nomeAluno = formularioAluno.nome.value;
     //const notaUmAluno = formularioAluno.notaum.value;
     //const notaDoisAluno = formularioAluno.notadois.value;
 
-    const aluno = obterDados(formularioAluno);
+function notasValidas(aluno){
+
+    if (!(aluno.notaUmAluno >=0 && aluno.notaUmAluno))
+    {
+         document.querySelector("#mensagem-erro").innerHTML = "A nota 1 esta errada!";
+         return false;
+    }
+    if (!(aluno.notaDoisAluno >=0 && aluno.notaDoisAluno))
+    {
+         document.querySelector("#mensagem-erro").innerHTML = "A nota 2 esta errada!";
+         return false;
+    }
+}
+
+function mnensagemErro(){
+    setTimeout(function(){
+        document.querySelector("#mensagem-erro").innerHTML = "";
+    }, 3000);
+}
 
     const alunoTr = document.createElement("tr");
 

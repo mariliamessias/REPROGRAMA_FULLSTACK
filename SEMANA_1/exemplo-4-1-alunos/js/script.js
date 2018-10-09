@@ -1,11 +1,10 @@
 window.addEventListener("load", function(){
-    imprimeTabelaDoHTML();
+    imprimeTabelaDoHTML(document.querySelectorAll(".aluno"));
 });
 
-function imprimeTabelaDoHTML(){
+function imprimeTabelaDoHTML(todosAlunos){
     
-const todosAlunos = document.querySelectorAll(".aluno"); // pega todos os elementos da classe aluno
-
+//const todosAlunos = document.querySelectorAll(".aluno"); // pega todos os elementos da classe aluno
     todosAlunos.forEach(function(aluno){ // pára cada item do array
 
         const primeiraNota = aluno.querySelector(".info-notaum").textContent;
