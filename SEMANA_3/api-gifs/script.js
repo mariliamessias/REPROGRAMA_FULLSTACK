@@ -11,14 +11,18 @@ function erro(){
 }
 
 function trazResultadoDaBusca(event){
-
-
-
+  event.preventDefault();
+  const respostaDaBusca = new XMLHttpRequest();
+  respostaDaBusca.open("GET",   
+  `http://api.giphy.com/v1/gifs/search?q=${buscaGif()}&api_key=I5HKpC7PubCko21CruBJHhbZE2fAk9Ze`);
+  respostaDaBusca.onload = carregaPostsComGifs; // o que vai acontecer no carregamento da resposta
+  respostaDaBusca.onerror = erro;
+  respostaDaBusca.send();
 }
 
 function carregaPostsComGifs(){
-
-
+  listaGifs = JSON.parse(this.responseText)["data"];
+  exibePosts();
 }
 
 function exibePosts(){
