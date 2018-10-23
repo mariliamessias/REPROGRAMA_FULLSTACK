@@ -1,16 +1,7 @@
-const linkCriarUmaConta = document.createElement('a');
-const linkFazerLogin = document.createElement('a');
-const formulario = document.createElement('form');
+const linkCriarUmaConta = React.createElement("a", {className:"link", href:"/conta", children:'Criar uma Conta'});
+const linkFazerLogin = React.createElement("a", {className:"link", href:"/login", children:'Fazer login'});
+const formularioLogin = React.createElement("form", {children: [linkCriarUmaConta, linkFazerLogin]});
+
 const divisaoProjeto = document.getElementById("projeto");
 
-linkCriarUmaConta.className = "link";
-linkCriarUmaConta.href = "/conta";
-linkCriarUmaConta.appendChild(document.createTextNode('Criar uma conta'));
-formulario.appendChild(linkCriarUmaConta);
-
-linkFazerLogin.className = "link";
-linkFazerLogin.href = "/login";
-linkFazerLogin.appendChild(document.createTextNode('Fazer Login'));
-formulario.appendChild(linkFazerLogin);
-
-divisaoProjeto.appendChild(formulario);
+ReactDOM.render(formularioLogin, divisaoProjeto);
