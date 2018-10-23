@@ -3,12 +3,9 @@ const linkFazerLogin = document.createElement('a');
 const formulario = document.createElement('form');
 const divisaoProjeto = document.getElementById("projeto");
 
-formulario.className = "formulario";
-
 linkCriarUmaConta.className = "link";
 linkCriarUmaConta.href = "/conta";
 linkCriarUmaConta.appendChild(document.createTextNode('Criar uma conta'));
-
 formulario.appendChild(linkCriarUmaConta);
 
 linkFazerLogin.className = "link";
