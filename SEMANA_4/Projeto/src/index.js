@@ -1,38 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Login from './paginas/Login/Login';
 import './index.css'
 
-function Link(props)
-{
-    return (
-        <a className="link" href={props.url}>
-            {props.children}
-        </a>
-    )
-}
 
-function Botao(props){
-    let classes = "botao";
-    if (props.desabilitado)
-    {
-        classes +=" botao--desabilitado";
-    }
+const pagina = <Login />
 
-    return (
-        <input className={classes} type="submit" value={props.children}></input>
-    )
-}
+const divisaoProjeto = document.getElementById('projeto')
 
-const paginaLogin = (
-    <main className = "pagina-login">
-        <h1>Login</h1>
-        <p>Entre com seu email e senha</p>        
-        <Botao desabilitado>Enviar</Botao>
-        <Botao>Enviar</Botao>
-
-        <Link url="/conta">Criar uma Conta</Link>
-        <Link url="/login">Fazer Login</Link>
-
-    </main>
-)
-ReactDOM.render(paginaLogin, document.getElementById("projeto"))
+ReactDOM.render(pagina, divisaoProjeto)
