@@ -12,10 +12,10 @@ function Conta() {
       <p>Envie o formulário para criar uma conta! </p>
       
       <Legenda htmlFor="nome">Nome:</Legenda>
-      <Campo id="nome"type="text" name="nome"placeholder="Nome"/>
+      <Campo id="nome"type="text" name="nome"placeholder="Nome" obrigatorio/>
 
       <Legenda htmlFor="telefone">Telefone:</Legenda>
-      <Campo id="telefone"type="text"name="telefone"placeholder="Telefone"/>
+      <Campo id="telefone"type="tel"name="telefone"placeholder="Telefone"/>
 
       <Legenda htmlFor="email">Email:</Legenda>
       <Campo id="email"type="email"name="email"placeholder="Email"/>
@@ -23,7 +23,7 @@ function Conta() {
       <Legenda htmlFor="senha">Senha:</Legenda>
       <Campo id="senha"type="password"name="senha"placeholder="Senha"/>
       
-      <Botao>Enviar</Botao>
+      <Botao desabilitado>Enviar</Botao>
 
       <Link url="/login">Fazer Login</Link>
     </main>
