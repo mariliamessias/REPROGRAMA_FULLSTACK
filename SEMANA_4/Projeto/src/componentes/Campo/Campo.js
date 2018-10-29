@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react' // só podemos ter um import para isso colocamos entre chaves o Component
 import './Campo.css'
 
 /*
@@ -11,7 +11,7 @@ if condição mostra erro
 - Email: obrigatorio, pelo menos 10 carateres
 - Senha: obrigatorio, pelo menos 6 caracteres
 */
-class Campo extends React.Component {
+class Campo extends Component {
   constructor(props) {
     super(props)
     this.state = { erro: ''}
@@ -35,8 +35,6 @@ class Campo extends React.Component {
   }
 
   render() {
-    console.log('Quero ver se o render foi chamado')
-    console.log(`this.props do campo ${this.props.name}`, this.props)
     
     return (
       <div>
@@ -47,6 +45,7 @@ class Campo extends React.Component {
           name={this.props.name}
           placeholder={this.props.placeholder}
           onChange={this.valida}
+          onBlur={this.valida}
         />
         <p className="campo__erro">{this.state.erro}</p>
       </div>
