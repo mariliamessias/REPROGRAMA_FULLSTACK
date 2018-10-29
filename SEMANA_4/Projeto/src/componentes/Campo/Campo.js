@@ -1,45 +1,53 @@
 import React from 'react'
 import './Campo.css'
 
-//component tudo que o react disponibiliza de componentes de classe para usar
-//apenas com classe podemos usar o objeto state
-
+/*
+1) O componente pode mudar de estado? Sim // Class
+2) Qual o estado inicial? state = { erro: '' } // constructor
+3) O que muda? setState({ erro: '' }) ou  // setState({erro: 'Campo obrigatório'})
+4) O que faz ele mudar?
+// function onChange pra verificar se devo ou não mostrar uma mensagem de erro
+if condição mostra erro
+- Email: obrigatorio, pelo menos 10 carateres
+- Senha: obrigatorio, pelo menos 6 caracteres
+*/
 class Campo extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state = {
-      erro:''
-    }
-
-    //quando a função valida for chamada, o this sempre será a classe campo
-    //this.valida = this.valida.bind(this)
+    this.state = { erro: ''}
   }
 
-  valida = (evento) =>{
-    //console.log('alvo', evento.target)
-    const alvo = evento.target;
-    if (this.props.obrigatorio && alvo.value === ''){
-      const state = {
-        erro: 'campo obrigatório'
-      }
-      this.setState(state)
+  valida = (evento) => {
+    const input = evento.target
+    
+    if (this.props.required && input.value.trim() === '') {
+      this.setState({ erro: 'Campo obrigatório'})
+    } else if (this.props.minLength && input.value.length < this.props.minLength) {
+      this.setState({ erro: `Digite pelo menos ${this.props.minLength} caracteres`})
+    } else if (this.props.pattern && !this.props.pattern.test(input.value)) {
+      this.setState({ erro: 'Valor inválido' })
+    } else {
+      this.setState({ erro: ''})
     }
   }
 
-  //sempre precisa ter a função render para passar o html par a tela
-  render(){
+  render() {
+    console.log('Quero ver se o render foi chamado')
+    console.log(`this.props do campo ${this.props.name}`, this.props)
+    
     return (
-    <div>
-      <input 
-        id={this.props.id}
-        className="campo"
-        type={this.props.type}
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        onChange={this.valida}
-      />
-      <p className='grupo__erro'>{this.state.erro}</p>
-     </div>
+      <div>
+        <input 
+          id={this.props.id}
+          className="campo"
+          type={this.props.type}
+          name={this.props.name}
+          placeholder={this.props.placeholder}
+          onChange={this.valida}
+        />
+
+        <p className="campo__erro">{this.state.erro}</p>
+      </div>
     )
   }
 }
