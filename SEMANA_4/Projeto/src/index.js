@@ -4,8 +4,7 @@ import Login from './paginas/Login/Login';
 import Conta from './paginas/Conta/Conta';
 import './index.css'
 
-
-const pagina = <Conta />
+const pagina = <Login />
 
 const divisaoProjeto = document.getElementById('projeto')
 

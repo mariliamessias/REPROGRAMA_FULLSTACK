@@ -17,6 +17,10 @@ class Campo extends Component {
     this.state = { erro: ''}
   }
 
+  temErro(){
+    return this.state.erro ? true :false
+  }
+
   valida = (evento) => {
     const input = evento.target
     const {value , type}= input
@@ -32,6 +36,7 @@ class Campo extends Component {
         mensagem = 'Valor inválido'
     } 
     this.setState({erro:mensagem})
+    this.props.onChange()
   }
 
   render() {
