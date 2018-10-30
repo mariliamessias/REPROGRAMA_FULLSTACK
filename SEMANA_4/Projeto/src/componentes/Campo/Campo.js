@@ -14,12 +14,13 @@ if condição mostra erro
 class Campo extends Component {
   constructor(props) {
     super(props)
-    this.state = { erro: ''}
+    this.state = { modificado:false, erro: ''}
   }
 
-  temErro(){
-    return this.state.erro ? true :false
+  temErro(evento){
+    return this.state.erro || !this.state.modificado ? true :false 
   }
+
 
   valida = (evento) => {
     const input = evento.target
@@ -35,8 +36,8 @@ class Campo extends Component {
     } else if (type==='email' && !regex.test(value)) {
         mensagem = 'Valor inválido'
     } 
-    this.setState({erro:mensagem})
-    this.props.onChange()
+    this.setState({modificado:true, erro:mensagem}, this.props.onChange) // chama essa função depois que colocar a mensagem de erro, sem delay
+   
   }
 
   render() {
