@@ -36,7 +36,7 @@ render() {
         <Legenda htmlFor="email">Email:</Legenda>
         
         <Campo 
-        //Campo é a instância da classe campo
+         //Campo é a instância da classe campo
           ref = {this.emailRef} // para buscar um valor em outro arquivo // guarda a referência aqui 
           id="email" 
           type="email" 
