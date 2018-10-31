@@ -17,7 +17,7 @@ class Campo extends Component {
     this.state = { modificado:false, erro: ''}
   }
 
-  temErro(evento){
+  temErro = (evento) =>{
     return this.state.erro || !this.state.modificado ? true :false 
   }
 

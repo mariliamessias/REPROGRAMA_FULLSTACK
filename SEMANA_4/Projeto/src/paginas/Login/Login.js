@@ -7,6 +7,7 @@ import './Login.css'
 
 class Login extends Component {
 
+//tudo que a função construtora recebe para conseguir construir os objetos
 constructor(props) {
   super(props) 
   this.emailRef = React.createRef() // criadas pois embaixo no render vamos usar
@@ -33,8 +34,10 @@ render() {
         <p>Entre com seu email e senha.</p>
         
         <Legenda htmlFor="email">Email:</Legenda>
+        
         <Campo 
-          ref = {this.emailRef} // para buscar um valor em outro arquivo // guarda a referência aqui
+        //Campo é a instância da classe campo
+          ref = {this.emailRef} // para buscar um valor em outro arquivo // guarda a referência aqui 
           id="email" 
           type="email" 
           name="email"
