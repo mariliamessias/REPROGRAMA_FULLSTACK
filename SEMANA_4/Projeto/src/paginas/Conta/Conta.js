@@ -1,4 +1,4 @@
-import React , {Component}from 'react'
+import React, { Component } from 'react'
 import Link from '../../componentes/Link/Link'
 import Botao from '../../componentes/Botao/Botao'
 import Legenda from '../../componentes/Legenda/Legenda'
@@ -6,31 +6,39 @@ import Campo from '../../componentes/Campo/Campo'
 import './Conta.css'
 
 
-class Conta extends Component{
+/*
+1) O componente pode mudar de estado? Sim // Class
+2) O que muda? setState({ desabilitado: false }) ou  // setState({ desabilitado: true })
+3) Qual o estado inicial? state = { desabilitado: false } // constructor
+4) O que faz ele mudar?
+// function onChange pra verificar se todos os campos estão corretos (não tem erro)
+*/
+class Conta extends Component {
   constructor(props) {
     super(props)
+
     this.nomeRef = React.createRef()
-    this.telRef = React.createRef()
+    this.telefoneRef = React.createRef()
     this.emailRef = React.createRef()
     this.senhaRef = React.createRef()
-    this.state = {desabilitado:true}
+
+    this.state = { desabilitado: true }
   }
 
-  handlerChange=() =>{
-
+  habilitaOuDesabilita = () => {
     const campoNome = this.nomeRef.current
-    const campoTelefone = this.telRef.current
+    const campoTelefone = this.telefoneRef.current
     const campoEmail = this.emailRef.current
-    const campoSenha =this.senhaRef.current
+    const campoSenha = this.senhaRef.current
 
-    if (campoNome.temErro() || campoTelefone.temErro() || campoEmail.temErro() || campoSenha.temErro()){
-      this.setState({desabilitado:true})
-    } else this.setState({desabilitado:false})
-
+    if (campoNome.temErro() || campoTelefone.temErro() || campoEmail.temErro() || campoSenha.temErro()) {
+      this.setState({ desabilitado: true })
+    } else {
+      this.setState({ desabilitado: false })
+    }
   }
 
-
-  render(){
+  render() {
     return (
       <main className="conta">
         <h1>Conta</h1>
@@ -38,57 +46,56 @@ class Conta extends Component{
         
         <Legenda htmlFor="nome">Nome:</Legenda>
         <Campo 
-          ref = {this.nomeRef}
+          ref={this.nomeRef}
           id="nome" 
           type="text" 
           name="nome" 
           placeholder="Nome" 
           required
           minLength={10}
-          onChange={this.handlerChange}
+          onChange={this.habilitaOuDesabilita}
         />
         
         <Legenda htmlFor="telefone">Telefone:</Legenda>
         <Campo 
-          ref = {this.telRef}
+          ref={this.telefoneRef}
           id="telefone" 
           type="tel" 
           name="telefone" 
           placeholder="Telefone"
           required
-          onChange={this.handlerChange}
+          onChange={this.habilitaOuDesabilita}
         />
         
         <Legenda htmlFor="email">Email:</Legenda>
         <Campo 
-           ref = {this.emailRef}
+          ref={this.emailRef}
           id="email" 
           type="email" 
           name="email"
           placeholder="Email"
           required
-          onChange={this.handlerChange}
+          onChange={this.habilitaOuDesabilita}
         />
         
         <Legenda htmlFor="senha">Senha:</Legenda>
         <Campo 
-          ref = {this.senhaRef}
+          ref={this.senhaRef}
           id="senha" 
           type="password" 
           name="senha"
           placeholder="Senha"
           required
           minLength={6}
-          onChange={this.handlerChange}
+          onChange={this.habilitaOuDesabilita}
         />
         
         <Botao desabilitado={this.state.desabilitado}>Enviar</Botao>
-
+  
         <Link url="/login">Fazer login</Link>
       </main>
     )
   }
-  
 }
 
 export default Conta

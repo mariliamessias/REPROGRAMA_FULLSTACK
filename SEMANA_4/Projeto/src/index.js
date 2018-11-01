@@ -1,34 +1,48 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Login from './paginas/Login/Login';
-import Conta from './paginas/Conta/Conta';
-import QuemSomos from './paginas/QuemSomos/QuemSomos';
-import Contato from './paginas/Contato/Contato';
-import {BrowserRouter, Switch, Route} from 'react-router-dom' // esse componente irá abraçar tudo que tem no site
-
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import Home from './paginas/Home/Home'
+import QuemSomos from './paginas/QuemSomos/QuemSomos'
+import Contato from './paginas/Contato/Contato'
+import Conta from './paginas/Conta/Conta'
+import Login from './paginas/Login/Login'
+import NaoEncontrada from './paginas/NaoEncontrada/NaoEncontrada'
 import './index.css'
 
-function App(){
-    return (
-        <div className="app">
-            {/*<NavBar>*/}
-                <Switch>
-                    <Route path="/" exact component={Login}/>
-                    <Route path="/conta" component={Conta}/>
-                    <Route path="/login" component={Login}/>
-                    <Route path="/quem-somos" component={QuemSomos}/>
-                    <Route path="/contato" component={Contato}/>
-                </Switch>
-        </div>
-    )
+let usuario = JSON.parse(localStorage.getItem('usuario'))
+
+function logaUsuario(dados) {
+  const json = JSON.stringify(dados)
+  localStorage.setItem('usuario', json)
+  usuario = dados
+}
+
+function App() {
+  return (
+    <div className="app">
+      {/* <Navbar /> */}
+
+      <Switch>
+        <Route path="/" exact render={() => {
+          return usuario ? <Home /> : <Redirect to="/login" />
+        }} />
+
+        <Route path="/login" render={(props) => {
+          return <Login historico={props.history} logaUsuario={logaUsuario} />
+        }}/>
+        
+        <Route path="/conta" component={Conta}/>
+        <Route path="/quem-somos" component={QuemSomos} />
+        <Route path="/contato" component={Contato} />
+        <Route component={NaoEncontrada} />
+      </Switch>
+    </div>
+  )
 }
 
 ReactDOM.render(
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>,
-    document.getElementById('projeto')
-) 
-// só recebe uma tela por vez
-
-//associação URL com o Componente = chamado de rota
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>, 
+  document.getElementById('projeto')
+)
