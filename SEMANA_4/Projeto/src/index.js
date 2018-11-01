@@ -5,6 +5,7 @@ import Home from './paginas/Home/Home'
 import QuemSomos from './paginas/QuemSomos/QuemSomos'
 import Contato from './paginas/Contato/Contato'
 import Conta from './paginas/Conta/Conta'
+import Navbar from './componentes/Navbar/Navbar'
 import Login from './paginas/Login/Login'
 import NaoEncontrada from './paginas/NaoEncontrada/NaoEncontrada'
 import './index.css'
@@ -20,7 +21,7 @@ function logaUsuario(dados) {
 function App() {
   return (
     <div className="app">
-      {/* <Navbar /> */}
+      <Navbar/>
 
       <Switch>
         <Route path="/" exact render={() => {
@@ -30,7 +31,7 @@ function App() {
         <Route path="/login" render={(props) => {
           return <Login historico={props.history} logaUsuario={logaUsuario} />
         }}/>
-        
+
         <Route path="/conta" component={Conta}/>
         <Route path="/quem-somos" component={QuemSomos} />
         <Route path="/contato" component={Contato} />
