@@ -1,5 +1,7 @@
 import React from 'react'
-import logo from   './logo.png'
+import logo from  './logo.png'
+import Menu from '../Menu/Menu'
+import {NavLink} from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar(){
@@ -9,7 +11,7 @@ function Navbar(){
             <a href="/">
                 <img className="navbar__logo" src={logo} alt="logo"/>
             </a>
-        {/*menu*/}
+         <Menu/>
         </header>
     )
 }
