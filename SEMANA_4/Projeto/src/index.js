@@ -18,10 +18,19 @@ function logaUsuario(dados) {
   usuario = dados
 }
 
+function deslogaUsuario(){
+  localStorage.removeItem(usuario)
+  usuario = null
+}
+
+//<Navbar usuario={usuario}/>  oara passar valor para o outra classe no caso a navbar
+
 function App() {
+
   return (
     <div className="app">
-      <Navbar/>
+      
+      <Navbar usuario={usuario} deslogaUsuario = {deslogaUsuario}/> 
 
       <Switch>
         <Route path="/" exact render={() => {
