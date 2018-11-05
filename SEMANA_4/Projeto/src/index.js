@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Home from './paginas/Home/Home'
@@ -49,6 +50,35 @@ function App() {
     </div>
   )
 }
+
+function passaDadosDoEstadoParaMeuComponente(state){
+  const props = {
+    usuario : state.usuario
+  }
+  return props
+}
+
+function passaFuncoesQueDisparamAcoesViaProps(dispatch){
+  const props = {
+    logaUsuario : (dados) =>{
+      const acao = {
+        type: 'LOGA_USUARIO',
+        dados: dados
+      }
+      dispatch(acao)
+    },
+    deslogaUsuario : () =>{
+      const acao = {
+        type: 'DESLOGA_USUARIO'
+      }
+      dispatch(acao)
+    }
+  }
+  return props
+}
+
+const conectaNaStore = connect(passaDadosDoEstadoParaMeuComponente, passaFuncoesQueDisparamAcoesViaProps)
+conectaNaStore(App)
 
 ReactDOM.render(
   <BrowserRouter>
