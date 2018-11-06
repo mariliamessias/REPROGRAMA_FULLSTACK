@@ -2,7 +2,7 @@ import React from 'react'
 import {connect,Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
 import store from './redux/store'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect , withRouter} from 'react-router-dom'
 import Home from './paginas/Home/Home'
 import QuemSomos from './paginas/QuemSomos/QuemSomos'
 import Contato from './paginas/Contato/Contato'
@@ -52,10 +52,11 @@ function passaDadosDoEstadoParaMeuComponente(state){
 
 function passaFuncoesQueDisparamAcoesViaProps(dispatch){
   const props = {
+    
     logaUsuario : (dados) =>{
       const acao = {
         type: 'LOGA_USUARIO',
-        dados: dados
+        dados: dados //dados é o que a pessoa preencheu no formulário
       }
       dispatch(acao)
     },
@@ -71,7 +72,7 @@ function passaFuncoesQueDisparamAcoesViaProps(dispatch){
 
 const conectaNaStore = connect(passaDadosDoEstadoParaMeuComponente, passaFuncoesQueDisparamAcoesViaProps)
 
-const AppConectada = conectaNaStore(App) //componente criado pela função
+const AppConectada = withRouter(conectaNaStore(App)) //componente criado pela função
 
 ReactDOM.render(
   <Provider store={store}>
