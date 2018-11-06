@@ -1,6 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {connect,Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
+import store from './redux/store'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Home from './paginas/Home/Home'
 import QuemSomos from './paginas/QuemSomos/QuemSomos'
@@ -11,22 +12,13 @@ import Login from './paginas/Login/Login'
 import NaoEncontrada from './paginas/NaoEncontrada/NaoEncontrada'
 import './index.css'
 
-let usuario = JSON.parse(localStorage.getItem('usuario'))
-
-function logaUsuario(dados) {
-  const json = JSON.stringify(dados)
-  localStorage.setItem('usuario', json)
-  usuario = dados
-}
-
-function deslogaUsuario(){
-  localStorage.removeItem(usuario)
-  usuario = null
-}
-
 //<Navbar usuario={usuario}/>  oara passar valor para o outra classe no caso a navbar
 
-function App() {
+function App(props) {
+
+  const usuario = props.usuario
+  const deslogaUsuario = props.deslogaUsuario
+  const logaUsuario = props.logaUsuario
 
   return (
     <div className="app">
@@ -78,11 +70,14 @@ function passaFuncoesQueDisparamAcoesViaProps(dispatch){
 }
 
 const conectaNaStore = connect(passaDadosDoEstadoParaMeuComponente, passaFuncoesQueDisparamAcoesViaProps)
-conectaNaStore(App)
+
+const AppConectada = conectaNaStore(App) //componente criado pela função
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>, 
+  <Provider store={store}>
+    <BrowserRouter>
+      <AppConectada/>
+    </BrowserRouter>
+  </Provider>, 
   document.getElementById('projeto')
 )
