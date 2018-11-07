@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect,Provider} from 'react-redux'
 import logo from  './logo.png'
 import Menu from '../Menu/Menu'
 import {Link} from 'react-router-dom'
@@ -20,4 +21,24 @@ function Navbar(props){
     )
 }
 
-export default Navbar
+function pegaDadosDoEstado(state){
+    return {
+        usuario:state.usuario
+    }
+}
+
+function passaDisparadoresDeAcao(dispatch){
+    return{
+        deslogaUsuario: () => {
+            const acao = {
+                type:'DESLOGA_USUARIO'   
+            }
+            dispatch(acao)
+        }  
+    }
+}
+
+const conectaNaStore = connect(pegaDadosDoEstado, passaDisparadoresDeAcao)
+const NavbarConectado = conectaNaStore (Navbar)
+
+export default NavbarConectado

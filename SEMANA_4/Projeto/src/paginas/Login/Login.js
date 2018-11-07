@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Link from '../../componentes/Link/Link'
 import Botao from '../../componentes/Botao/Botao'
+import {connect,Provider} from 'react-redux'
 import Legenda from '../../componentes/Legenda/Legenda'
 import Campo from '../../componentes/Campo/Campo'
 import './Login.css'
@@ -28,7 +29,7 @@ class Login extends Component {
 
     this.props.logaUsuario(dados)
 
-    this.props.historico.push('/')
+    this.props.history.push('/')
   }
 
   habilitaOuDesabilita = () => {
@@ -66,4 +67,19 @@ class Login extends Component {
   }
 }
 
-export default Login
+function passaDisparadoresDeAcao(dispatch){
+  return{
+      logaUsuario : (dados) =>{
+        const acao = {
+          type: 'LOGA_USUARIO',
+          dados: dados //dados é o que a pessoa preencheu no formulário
+        }
+          dispatch(acao)
+        }  
+  }
+}
+
+const conectaNaStore = connect(null, passaDisparadoresDeAcao)
+const LoginConectado = conectaNaStore (Login)
+
+export default LoginConectado
