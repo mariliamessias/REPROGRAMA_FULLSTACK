@@ -41,7 +41,7 @@ class Menu extends Component {
 
         return (
             <nav className="navbar-menu">
-                <a className={classesDoBotao} onClick={this.abreOuFechaMenu}>Menu</a>
+                <button className={classesDoBotao} onClick={this.abreOuFechaMenu}>Menu</button>
                 <ul className={classesDasOpcoes}>
                     <li>
                         <NavLink to="/quem-somos" activeClassName="navbar-menu__opcoes--ativo" onClick={this.abreOuFechaMenu}>Quem somos</NavLink>

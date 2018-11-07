@@ -2,7 +2,7 @@ import React from 'react'
 import {connect,Provider} from 'react-redux'
 import logo from  './logo.png'
 import Menu from '../Menu/Menu'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 import './Navbar.css'
 
@@ -41,4 +41,7 @@ function passaDisparadoresDeAcao(dispatch){
 const conectaNaStore = connect(pegaDadosDoEstado, passaDisparadoresDeAcao)
 const NavbarConectado = conectaNaStore (Navbar)
 
-export default NavbarConectado
+export default withRouter(NavbarConectado)
+
+//withRouter - permite que atualize o componemte toda vez que a 
+//rota(página) mudar // usar só quando usamos navlink

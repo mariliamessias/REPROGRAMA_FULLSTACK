@@ -1,8 +1,8 @@
 import React from 'react'
-import {connect,Provider} from 'react-redux'
+import {Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
 import store from './redux/store'
-import { BrowserRouter, Switch, Route, Redirect , withRouter} from 'react-router-dom'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Home from './paginas/Home/Home'
 import QuemSomos from './paginas/QuemSomos/QuemSomos'
 import Contato from './paginas/Contato/Contato'
@@ -14,25 +14,15 @@ import './index.css'
 
 //<Navbar usuario={usuario}/>  oara passar valor para o outra classe no caso a navbar
 
-function App(props) {
-
-  const usuario = props.usuario
-  const deslogaUsuario = props.deslogaUsuario
-  const logaUsuario = props.logaUsuario
+function App() {
 
   return (
     <div className="app">
       
       <Navbar/> 
-
       <Switch>
-        <Route path="/" exact render={() => {
-          return usuario ? <Home /> : <Redirect to="/login" />
-        }} />
-
+        <Route path="/" exact component={Home} />
         <Route path="/login" component={Login}/>
-        }}/>
-
         <Route path="/conta" component={Conta}/>
         <Route path="/quem-somos" component={QuemSomos} />
         <Route path="/contato" component={Contato} />
@@ -42,41 +32,12 @@ function App(props) {
   )
 }
 
-function passaDadosDoEstadoParaMeuComponente(state){
-  const props = {
-    usuario : state.usuario
-  }
-  return props
-}
-
-function passaFuncoesQueDisparamAcoesViaProps(dispatch){
-  const props = {
-    
-    logaUsuario : (dados) =>{
-      const acao = {
-        type: 'LOGA_USUARIO',
-        dados: dados //dados é o que a pessoa preencheu no formulário
-      }
-      dispatch(acao)
-    },
-    deslogaUsuario : () =>{
-      const acao = {
-        type: 'DESLOGA_USUARIO'
-      }
-      dispatch(acao)
-    }
-  }
-  return props
-}
-
-const conectaNaStore = connect(passaDadosDoEstadoParaMeuComponente, passaFuncoesQueDisparamAcoesViaProps) // monta o objeto props
-
-const AppConectada = withRouter(conectaNaStore(App)) //componente criado pela função
+//Provider precisa ficar para que os filhos possam acessar
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <AppConectada/>
+      <App/>
     </BrowserRouter>
   </Provider>, 
   document.getElementById('projeto')
