@@ -2,6 +2,7 @@ import React from 'react'
 import {connect,Provider} from 'react-redux'
 import logo from  './logo.png'
 import Menu from '../Menu/Menu'
+import {deslogaUsuario} from '../../redux/actions'
 import {Link, withRouter} from 'react-router-dom'
 
 import './Navbar.css'
@@ -21,27 +22,4 @@ function Navbar(props){
     )
 }
 
-function pegaDadosDoEstado(state){
-    return {
-        usuario:state.usuario
-    }
-}
-
-function passaDisparadoresDeAcao(dispatch){
-    return{
-        deslogaUsuario: () => {
-            const acao = {
-                type:'DESLOGA_USUARIO'   
-            }
-            dispatch(acao)
-        }  
-    }
-}
-
-const conectaNaStore = connect(pegaDadosDoEstado, passaDisparadoresDeAcao)
-const NavbarConectado = conectaNaStore (Navbar)
-
-export default withRouter(NavbarConectado)
-
-//withRouter - permite que atualize o componemte toda vez que a 
-//rota(página) mudar // usar só quando usamos navlink
+export default withRouter(connect((state)=>({ usuario:state.usuario }), {deslogaUsuario}) (Navbar))

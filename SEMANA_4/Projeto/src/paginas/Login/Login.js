@@ -4,8 +4,8 @@ import Botao from '../../componentes/Botao/Botao'
 import {connect,Provider} from 'react-redux'
 import Legenda from '../../componentes/Legenda/Legenda'
 import Campo from '../../componentes/Campo/Campo'
+import {logaUsuario} from '../../redux/actions'
 import './Login.css'
-
 
 class Login extends Component {
   constructor(props) {
@@ -67,19 +67,6 @@ class Login extends Component {
   }
 }
 
-function passaDisparadoresDeAcao(dispatch){
-  return{
-      logaUsuario : (dados) =>{
-        const acao = {
-          type: 'LOGA_USUARIO',
-          dados: dados //dados é o que a pessoa preencheu no formulário
-        }
-          dispatch(acao)
-        }  
-  }
-}
+//const LoginConectado = connect(null, {logaUsuario})(Login)
 
-const conectaNaStore = connect(null, passaDisparadoresDeAcao)
-const LoginConectado = conectaNaStore (Login)
-
-export default LoginConectado
+export default connect(null, {logaUsuario})(Login)

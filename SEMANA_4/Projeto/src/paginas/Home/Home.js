@@ -17,14 +17,7 @@ function Home(props) {
   )
 }
 
-function passaDadosDoEstadoNoProps(state){
-    return{
-      usuario:state.usuario
-    }
-}
+export default connect((state)=>({ usuario:state.usuario }))(Home) // { chave do objeto, o ( é para que seja identificada a função
 // não precisa passar a segunda pois o sisem, ja entende que é nulo
-const conectaNaStore = connect(passaDadosDoEstadoNoProps)
 
-const HomeConectado = conectaNaStore(Home)
 
-export default HomeConectado
