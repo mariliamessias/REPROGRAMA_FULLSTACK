@@ -12,3 +12,12 @@ export function  deslogaUsuario() {
         type:'DESLOGA_USUARIO'   
     }
 }  
+
+export function cadastraPostit(dados)
+{
+    return{
+        type: 'CADASTRA_POSTIT',
+        dados
+    }
+}
+

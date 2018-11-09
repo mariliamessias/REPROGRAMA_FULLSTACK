@@ -24,11 +24,14 @@ function usuario(state = usuarioInicial,action) {
 }
 
 // postitsAtuais = [] a primeira vez que abrir a página não haverá postits por isso array vazio
-function postits(postitsAtuais = [], action)
+function postits(estadoAtualdePostits = [], action)
 {
     switch (action.type){
+        case 'CADASTRA_POSTIT': 
+            
+        return estadoAtualdePostits.concat(action.dados)
         default: 
-            return postitsAtuais
+            return estadoAtualdePostits
     }
 }
 
