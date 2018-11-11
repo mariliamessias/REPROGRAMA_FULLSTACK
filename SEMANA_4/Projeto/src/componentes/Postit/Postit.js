@@ -25,6 +25,9 @@ class Postit extends Component{
         form.reset()
     }
     render(){
+
+        const cadastrando = !this.props.id // se não tem ID no props
+
         return (
             <form className="postit" onSubmit={this.cadastraOuAlteraPostit}>
                 <input
