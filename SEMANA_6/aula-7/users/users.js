@@ -18,7 +18,7 @@ const users = [
     name: 'Silvia',
     email: 'silvia@reprograma.com.br',
     password: 'r3pr0gr@m@2016',
-    roles: [],
+    roles: ['admin'],
   }
 ];
 

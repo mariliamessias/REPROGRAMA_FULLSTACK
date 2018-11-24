@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
       throw new TokenError('Sem permissão.', 500);
     }
 
-    jwt.verify(token, process.env.SECRET, function(error, decoded) {
+    jwt.verify(token, process.env.SECRET, function(error, decoded) {   
       if (error) {
         throw new TokenError('Falha ao autenticar token.', 500);
       }
@@ -64,7 +64,7 @@ router.post('/', (req, res) => {
     email: req.body.email
   };
   let decodedId;
-
+  
   try {
     if (!token) {
       throw new TokenError('Sem permissão.', 500);
@@ -107,7 +107,7 @@ router.put('/:id', (req, res) => {
 
     hasPermission(decodedId);
     validatesRequest(req.body);
-    Object.assign(user, req.body);
+    Object.assign(user, req.body); 
     res.send(user);
   } catch(e) {
     res.status(e.code).send(e.message);
@@ -120,7 +120,7 @@ router.delete('/:id', (req, res) => {
     const user = findUser(req.params.id);
     const index = users.indexOf(user);
     let decodedId;
-
+    
     if (!token) {
       throw new TokenError('Sem permissão.', 500);
     }
@@ -131,10 +131,16 @@ router.delete('/:id', (req, res) => {
       }
 
       decodedId = decoded.id;
+
+      if (req.params.id  == decoded.id)
+      {
+        throw new TokenError('Você não pode deletar seu ID.', 500);
+      }
+      
     });
 
     hasPermission(decodedId);
-    validateToken(token);
+    //validateToken(token);
     users.splice(index, 1);
     res.send(user);
   } catch(e) {
