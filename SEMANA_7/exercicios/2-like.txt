@@ -1,11 +1,23 @@
 1.	Selecione todos os registros em que as descrições contenham em qualquer parte da palavra, 'js'.
 
+ db.todo.find({"descricao": /js/}).pretty()
+
 2.	Selecione todos os registros em que as descrições terminem com a letra 't'.
+
+ db.todo.find({"descricao": /t$/}).pretty()
 
 3.	Selecione todos os registros em que as descrições terminem com a letra 'l'.
 
+ db.todo.find({"descricao": /l$/}).pretty()
+
 4.	Selecione todos os registros em que as descrições terminem com a letra 't' ou 'l'.
+
+db.todo.find({$or:[{"descricao":/t/},{"descricao":/s/}]}).pretty()
 
 5.	Selecione todos os registros em que as descrições comecem com a letra 'b'.
 
+db.todo.find({"descricao":/^b/}).pretty()
+
 6.	Selecione todos os registros em que as descrições comecem com a letra 'j' ou 'h'.
+
+db.todo.find({$or:[{"descricao":/^j/},{"descricao":/^h/}]}).pretty()
