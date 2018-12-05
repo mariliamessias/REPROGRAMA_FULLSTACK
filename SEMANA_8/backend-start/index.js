@@ -7,6 +7,17 @@ const users = require('./users/users.js');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+var mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/integracao")
+
+var db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "Erro de Conexão."));
+db.once("open", function(){
+    console.log("Conexão Feita com Sucesso.")
+});
+
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");

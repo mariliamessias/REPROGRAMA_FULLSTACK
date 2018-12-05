@@ -91,7 +91,7 @@ export function listaPostits() {
       .then(response => {
 
         const dados = response.data.map( item => ({
-          id : item.id,
+          id : item._id,
           titulo : item.title,
           texto : item.description
         }));
