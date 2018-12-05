@@ -48,15 +48,30 @@ app.post('/api/login', (req, res) => {
 });
 
 function authenticatesUser(authUser, cb) {
-  const user = users.find(user => user.email === authUser.email);
+  // const user = users.find(user => user.email === authUser.email);
 
-  if (!user) {
-    return cb({ code: 500, message: 'Usuário não existe.' });
-  } else if (user.password !== authUser.password) {
-    return cb({ code: 500, message: 'Senha incorreta.' });
-  }
+  // if (!user) {
+  //   return cb({ code: 500, message: 'Usuário não existe.' });
+  // } else if (user.password !== authUser.password) {
+  //   return cb({ code: 500, message: 'Senha incorreta.' });
+  // }
+  // return cb(null, user.id);
 
-  return cb(null, user.id);
+  users.findOne({
+    email: authUser.email,
+    password: authUser.password
+
+  }, function(error, response){
+
+    if (error){
+      return cb({code:500, message: error.message})
+    } else if (response === null){
+      return cb({code:404, message: "Usuário ou senha inválido"})
+    }else{
+      return cb(null, response.id)
+    }
+
+  });
 };
 
 app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}...`));
