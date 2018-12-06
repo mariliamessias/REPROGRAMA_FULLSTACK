@@ -57,6 +57,23 @@ export function cadastraPostit(dados) {
   }
 }
 
+export function cadastraUsuario(dados) {
+  return (dispatch) => {
+    const json = {
+      name: dados.nome,
+      phone: dados.telefone,
+      email: dados.email,
+      password: dados.senha
+    }
+    api
+      .post('/users', json)
+      .then(response => {
+        // dados.id = response.data.id
+        dispatch({ type: 'LOGA_USUARIO', dados })
+      })
+  }
+}
+
 export function alteraPostit(dados) {
   return (dispatch) => {
     const url = `/postits/${dados.id}`

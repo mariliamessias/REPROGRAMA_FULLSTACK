@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Link from '../../componentes/Link/Link'
+import { cadastraUsuario } from '../../redux/actions'
+import { connect } from 'react-redux'
 import Botao from '../../componentes/Botao/Botao'
 import Legenda from '../../componentes/Legenda/Legenda'
 import Campo from '../../componentes/Campo/Campo'
@@ -37,6 +39,22 @@ class Conta extends Component {
     }
   }
 
+  enviaDados = (evento) => {
+    evento.preventDefault()
+    const campoNome = this.nomeRef.current
+    const campoTelefone = this.telefoneRef.current
+    const campoEmail = this.emailRef.current
+    const campoSenha = this.senhaRef.current
+    const dados = {
+      email: campoEmail.getValor(),
+      senha: campoSenha.getValor(),
+      telefone: campoTelefone.getValor(),
+      nome : campoNome.getValor()
+    }
+
+    this.props.cadastraUsuario(dados)
+  }
+
   render() {
     return (
       <main className="conta">
@@ -55,7 +73,7 @@ class Conta extends Component {
         <Legenda htmlFor="senha">Senha:</Legenda>
         <Campo ref={this.senhaRef} id="senha" type="password" name="senha" placeholder="Senha" required minLength={6} onChange={this.habilitaOuDesabilita} />
         
-        <Botao desabilitado={this.state.desabilitado}>Enviar</Botao>
+        <Botao desabilitado={this.state.desabilitado}  onClick={this.cadastraUsuario}>Enviar</Botao>
   
         <Link url="/login">Fazer login</Link>
       </main>
@@ -63,4 +81,7 @@ class Conta extends Component {
   }
 }
 
-export default Conta
+export default connect(
+  (state) => ({ usuario: state.usuario }), 
+  { cadastraUsuario }
+)(Conta)
